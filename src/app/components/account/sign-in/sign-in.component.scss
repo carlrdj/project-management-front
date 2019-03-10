@@ -1,0 +1,41 @@
+
+
+
+
+
+
+
+
+
+.sign-in {
+    width: 100%;
+    mat-card {    
+        mat-card-header {
+        }
+        display: block !important;
+        img.mat-card-image {
+            width: 200px;
+            margin: 45px auto;
+            display: block;
+        }
+        mat-card-content {
+            .btn-sign-in {
+                font-size: 1.15em;
+                font-weight: 700;
+            }
+        }
+        mat-card-actions {            
+            margin: 0px;
+        }
+    }
+    a.sign-up {
+        margin: auto;
+    }
+}
+
+
+@media (min-width: 576px) {
+    .sign-in {
+        width: 380px;
+    }
+}

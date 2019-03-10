@@ -1,0 +1,38 @@
+<mat-toolbar>
+    <img class="avatar" src="https://c-ash.smule.com/sf/s57/arr/e8/7b/8ad3b9ef-e2f9-4229-b576-8c28039b49c3_256.jpg">
+    <a routerLink *ngIf="expandedSideNav">
+        carl.rdj@gmail.com
+    </a>
+    <button mat-icon-button (click)="sideNavExpanded(false)" *ngIf="expandedSideNav">
+        <mat-icon>chevron_left</mat-icon>
+    </button>
+</mat-toolbar>
+<mat-list [ngClass]="{'side-nav-expand' : expandedSideNav, 'side-nav-pick-up' : !expandedSideNav}">
+    <mat-divider></mat-divider>
+    <div class="navigation" *ngFor="let menu of listMenu; let i = index" [ngClass]="{'selected' : menu.selected}" autosize>
+        <a mat-list-item routerLink matRipple [ngClass]="{'active-link' : menu.active}" (click)="showSubMenu(menu)">
+            <mat-icon>{{menu.icon}}</mat-icon>
+            <span *ngIf="expandedSideNav">
+                {{menu.name}}
+            </span>
+        </a>
+        <mat-list [id]="'menu' + i">
+            <a mat-list-item routerLink matRipple *ngFor="let subMenu of menu.subMenu"
+                [ngClass]="{'active-link' : subMenu.active}" (click)="activeSubMenu(menu, menu.subMenu)">
+                <mat-icon>{{subMenu.icon}}</mat-icon>
+                <span>
+                    {{subMenu.name}}
+                </span>
+            </a>
+        </mat-list>
+    </div>
+    <mat-divider></mat-divider>
+    <div class="navigation">
+        <a mat-list-item routerLink matRipple>
+            <mat-icon>settings</mat-icon>
+            <span *ngIf="expandedSideNav">
+                configuración
+            </span>
+        </a>
+    </div>
+</mat-list>

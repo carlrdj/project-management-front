@@ -1,0 +1,19 @@
+<mat-sidenav-container class="mat-drawer-transition" autosize>
+    <!-- Start SideNav -->
+    <mat-sidenav #sidenav [mode]="sideNav.mode" [opened]="sideNav.opened" [fixedInViewport]="sideNav.fixedInViewport">
+        <app-side-nav [expandedSideNav]="sideNav.expandedSideNav" (onSideNavExpanded)="onSideNavExpanded($event)">
+        </app-side-nav>
+    </mat-sidenav>
+    <!-- End SideNav -->
+    <mat-sidenav-content>
+        <!-- Start Toolbar -->
+        <app-toolbar [expandedSideNav]="sideNav.expandedSideNav" (onSideNavExpanded)="onSideNavExpanded($event)">
+        </app-toolbar>
+        <!-- End Toolbar -->
+        <router-outlet>
+            <mat-progress-bar [value]="progressBar" color="accent" mode="indeterminate">
+            </mat-progress-bar>
+        </router-outlet>
+        <p><button mat-button (click)="sidenav.toggle()">Toggle</button></p>
+    </mat-sidenav-content>
+</mat-sidenav-container>

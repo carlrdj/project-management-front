@@ -1,0 +1,243 @@
+
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import '~@angular/material/theming';
+// Plus imports for other components in your app.
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+// Define the palettes for your theme using the Material Design palettes available in palette.scss
+// (imported above). For each palette, you can optionally specify a default, lighter, and darker
+// hue. Available color palettes: https://material.io/design/color/
+$project-management-primary: mat-palette($mat-blue, A400);
+$project-management-accent: mat-palette($mat-deep-orange, A200, A100, A400);
+// The warn palette is optional (defaults to red).
+$project-management-warn: mat-palette($mat-red);
+
+// Create the theme object (a Sass map containing all of the palettes).
+$project-management-theme: mat-light-theme($project-management-primary, $project-management-accent, $project-management-warn);
+
+// Include theme styles for core and each component used in your app.
+// Alternatively, you can import and @include the theme mixins for each component
+// that you are using.
+@include angular-material-theme($project-management-theme);
+
+// Bootstrap
+@import './assets/css/bootstrap.min.css';
+.mat-form-field-appearance-outline {
+    .mat-form-field-outline-thick {
+        color: rgba(0, 0, 0, 0.12);
+        .mat-form-field-outline-end, 
+        .mat-form-field-outline-gap, 
+        .mat-form-field-outline-start {
+            border-width: 1px !important;
+        }
+    }
+
+    &.mat-focused {
+      .mat-form-field-outline-thick {
+        .mat-form-field-outline-end, 
+        .mat-form-field-outline-gap, 
+        .mat-form-field-outline-start {
+            border-width: 2px !important;
+        }
+      }
+    }
+}
+/*
+* Style App
+*/
+$color: #555555 !important;
+/* Generic */
+html, body { 
+    height: 100%;
+    color: $color;
+}
+body { 
+    margin: 0; 
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 14px;
+}
+input:-webkit-autofill, input:-webkit-autofill:hover, input:-webkit-autofill:focus textarea:-webkit-autofill, textarea:-webkit-autofill:hover textarea:-webkit-autofill:focus, select:-webkit-autofill, select:-webkit-autofill:hover, select:-webkit-autofill:focus {
+    -webkit-text-fill-color: none;
+    -webkit-box-shadow: 0 0 0px 1000px none inset;
+    transition: background-color 5000s ease-in-out 0s;
+}
+a {
+    color: $color;
+    text-decoration: none;
+}
+@-webkit-keyframes animation-dropdown-submenu { 0% { max-height:0px; } 100% { max-height:500px;}}
+@-moz-keyframes animation-dropdown-submenu { 0% { max-height:0px;} 100% { max-height:500px;}}
+
+/* Side nav */
+mat-sidenav-container {
+    height: 100%;
+    mat-sidenav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(255, 255, 255, 1);
+        mat-toolbar.mat-toolbar {
+            background: rgba(255, 255, 255, 1);
+            img.avatar {
+                height: 40px;
+                width: 40px;
+                border-radius: 50%;
+            }
+            a {
+                min-width: 150px;
+                font-size: 0.7em;
+                margin-left: 1.4em;
+                flex: 1 1 auto;
+            }
+            button {
+            }
+        }
+        mat-list {
+            padding-top: 0px !important; 
+            .navigation {
+                a {
+                    font-size: 1.1em;
+                    mat-icon {
+                        width: 40px;
+                        text-align: center;
+                    }
+                    &.active-link {
+                        color: mat-color($project-management-primary) !important;                        
+                    }
+                }
+                mat-list{
+                    a {
+                        border-left: 4px solid $color;
+                        &:before {
+                            display: none;
+                        }
+                        &.active-link {
+                           border-left: 4px solid mat-color($project-management-primary) !important;
+                        }
+                    }
+                }
+                &.selected:not(.active){                   
+                    mat-list{
+                        a {
+                            mat-icon {
+                                margin-left: 0.5em;
+                            }
+                            &:hover {
+                                border-color: mat-color($project-management-primary) !important;
+                            }
+                            &.active-link {
+                               border-color: mat-color($project-management-primary) !important;
+                            }
+                        }
+                    }
+                }
+            }
+            &.side-nav-expand {
+                .navigation {
+                    a {
+                        position: relative;
+                        span {
+                            margin-left: 1.4em;
+                        }
+                        &:before{
+                            font-family: "Material Icons";
+                            content: "keyboard_arrow_down";
+                            position: absolute;
+                            top: 40%;
+                            right: 10px;
+                            -webkit-transition: -webkit-transform .2s ease-in-out;
+                            -ms-transition: -ms-transform .2s ease-in-out;
+                            transition: transform .2s ease-in-out;  
+                        }
+                    }
+                    mat-list{
+                        a {
+                            max-height:0px;
+                            -webkit-transition: -webkit-transform .8s ease-in-out;
+                            -ms-transition: -ms-transform .8s ease-in-out;
+                            transition: transform .8s ease-in-out;
+                            visibility: hidden;
+                        }
+                    }
+                    &.selected:not(.active){
+                        a {
+                            &:before{
+                                transform: rotate(90deg);
+                                -ms-transform: rotate(90deg);
+                                -webkit-transform: rotate(90deg);
+                            }
+                        }
+                        mat-list{
+                            a {
+                                max-height: 500px;
+                                visibility: visible;
+                                -webkit-animation: animation-dropdown-submenu 0.8s ease-out;
+                                -moz-animation: animation-dropdown-submenu 0.8s ease-out;
+                            }
+                        }
+                    }
+                }
+            }
+            &.side-nav-pick-up {
+                .navigation {
+                    mat-list{
+                        display: none;
+                        box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+                        a {
+                            max-height:0px;
+                            -webkit-transition: -webkit-transform .8s ease-in-out;
+                            -ms-transition: -ms-transform .8s ease-in-out;
+                            transition: transform .8s ease-in-out;
+                            mat-icon {
+                                width: 40px;
+                                text-align: left;
+                            }
+                        }
+                    }
+                    &.selected:not(.active){
+                        a {
+                            &:before{
+                                transform: rotate(90deg);
+                                -ms-transform: rotate(90deg);
+                                -webkit-transform: rotate(90deg);
+                            }
+                        }
+                        mat-list{
+                            display: block;
+                            position: fixed;
+                            left: 72px;
+                            a {
+                                background-color: #FFFFFF;
+                                max-height: 500px;
+                                visibility: visible;
+                                -webkit-animation: animation-dropdown-submenu 0.8s ease-out;
+                                -moz-animation: animation-dropdown-submenu  0.8s ease-out;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    mat-sidenav-content {
+        mat-toolbar {
+            mat-toolbar-row {
+                span.spacer {
+                    flex: 1 1 auto;
+                }
+            }
+        }
+        router-outlet {
+            mat-progress-bar {
+                position: absolute !important;
+            }
+        }
+    }
+}
+
+
